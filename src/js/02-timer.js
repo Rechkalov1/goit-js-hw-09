@@ -3,9 +3,9 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-form=document.querySelector('#datetime-picker');
-timeElAll=document.querySelectorAll('.value');
-buttonStart=document.querySelector("[data-start]")
+const form = document.querySelector('#datetime-picker');
+ const timeElAll=document.querySelectorAll('.value');
+ const buttonStart=document.querySelector("[data-start]")
 // Стучусь к форме и датах
 
 buttonStart.addEventListener('click', onButton);
