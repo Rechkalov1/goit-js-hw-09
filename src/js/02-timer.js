@@ -24,24 +24,25 @@ const options = {
 
 flatpickr(form, options);
 // отсчет времени
-let timer =0;
-let intervalId =null;
+let selectedTime =0;
+
 
 function onClose(selectedDates){
-  const newDate= options.defaultDate;
+  const currentDate= options.defaultDate;
 
-  if(selectedDates[0]<newDate){
+  if(selectedDates[0]<currentDate){
     Notify.failure(`Please choose Date`,{
       timeout: 2000,});
-  }else if (selectedDates[0]>newDate){
+  }else{
     buttonStart.disabled=false;
-   timer=selectedDates[0];
+    selectedTime=selectedDates[0];
   }
 }
-function timerInterval(date){
+function timerInterval(selectedDate){
+  let intervalId =null;
   intervalId=setInterval(()=>{
     const currentTime=Date.now();
-    const countDownTime= date -currentTime;
+    const countDownTime= selectedDate -currentTime;
     const time =convertMs(countDownTime);
     updateTime(time);
     if(countDownTime<1000){
@@ -54,7 +55,7 @@ function timerInterval(date){
 function onButton(){
   buttonStart.disabled=true;
   form.disabled=true;
-  timerInterval(timer)
+  timerInterval(selectedTime)
 };
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');};
@@ -82,6 +83,4 @@ function addLeadingZero(value) {
 
 
 
-  // console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-  // console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-  // console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+  
